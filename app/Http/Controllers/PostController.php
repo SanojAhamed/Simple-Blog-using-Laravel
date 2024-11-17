@@ -29,10 +29,7 @@ class PostController extends Controller
         $validated = $request->validated();
 
         if ($request->hasFile('featured_image')) {
-            // Ensure the directory exists
-            Storage::disk('public')->makeDirectory('images/posts/featured-images');
-
-            $filePath = Storage::disk('public')->put('images/posts/featured-images', $request->file('featured_image'));
+            $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'));
             $validated['featured_image'] = $filePath;
         }
 
@@ -45,7 +42,6 @@ class PostController extends Controller
 
         return abort(500);
     }
-
     public function show(string $id): Response
     {
         return response()->view('posts.show', [
@@ -67,8 +63,7 @@ class PostController extends Controller
 
         if ($request->hasFile('featured_image')) {
             Storage::disk('public')->delete($post->featured_image);
-
-            $filePath = Storage::disk('public')->put('images/posts/featured-images', $request->file('featured_image'));
+            $filePath = Storage::disk('public')->put('images/posts/featured-images', request()->file('featured_image'), 'public');
             $validated['featured_image'] = $filePath;
         }
 
@@ -85,13 +80,8 @@ class PostController extends Controller
     public function destroy(string $id): RedirectResponse
     {
         $post = Post::findOrFail($id);
-
-        if ($post->featured_image) {
-            Storage::disk('public')->delete($post->featured_image);
-        }
-
-        $delete = $post->delete();
-
+        Storage::disk('public')->delete($post->featured_image);
+        $delete = $post->delete($id);
         if ($delete) {
             session()->flash('notif.success', 'Post deleted successfully!');
             return redirect()->route('posts.index');
