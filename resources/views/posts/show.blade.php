@@ -13,7 +13,6 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ 'Title' }}
                         </h2>
-
                         <p class="mt-1 text-sm text-gray-600">
                             {{ $post->title }}
                         </p>
@@ -22,7 +21,6 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ 'Content' }}
                         </h2>
-
                         <p class="mt-1 text-sm text-gray-600">
                             {{ $post->content }}
                         </p>
@@ -31,17 +29,14 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ 'Post Image' }}
                         </h2>
-
                         <p class="mt-1 text-sm text-gray-600">
-                            <img class="h-64 w-128" src="{{ Storage::url($post->featured_image) }}"
-                                alt="{{ $post->title }}" srcset="">
+                            <img class="h-64 w-128" src="{{ Storage::url($post->featured_image) }}" alt="{{ $post->title }}" srcset="">
                         </p>
                     </div>
                     <div class="mb-6">
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ 'Create' }}
                         </h2>
-
                         <p class="mt-1 text-sm text-gray-600">
                             {{ $post->created_at }}
                         </p>
@@ -50,7 +45,6 @@
                         <h2 class="text-lg font-medium text-gray-900">
                             {{ 'Updated' }}
                         </h2>
-
                         <p class="mt-1 text-sm text-gray-600">
                             {{ $post->updated_at }}
                         </p>

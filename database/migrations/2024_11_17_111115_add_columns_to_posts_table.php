@@ -24,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->dropColumn(['title', 'content', 'post_image']);
+            $table->dropColumn(['title', 'content', 'featured_image']);
         });
     }
 };
